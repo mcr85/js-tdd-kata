@@ -5,7 +5,8 @@ function Calc() {
 Calc.prototype.constructor = Calc;
 
 Calc.prototype.add = function(numbers) {
-    var components;
+    var components, 
+        result = 0;
 
     // no values
     if (!numbers) {
@@ -19,6 +20,10 @@ Calc.prototype.add = function(numbers) {
 
     components = numbers.split(',');
 
+    for (var i = 0; i < components.length; i++) {
+        result += parseInt(components[i], 10);
+    }
+
     // two values
-    return parseInt(components[0], 10) + parseInt(components[1], 10);
+    return result;
 };
