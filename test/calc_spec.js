@@ -2,8 +2,17 @@
 
 describe('String Calculator tests', function() {
 
-    it('tests tests', function() {
-        expect(true).to.be.true;
+    var calc;
+    beforeEach(function() {
+        calc = new Calc();
+    });
+
+    describe('add method', function() {
+
+        it('returns empty string if no values passed', function() {
+            expect(calc.add()).to.equal('');
+        });
+
     });
 
 });
