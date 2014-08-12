@@ -25,6 +25,10 @@ describe('String Calculator tests', function() {
             expect(calc.add('2,2,2,2,2')).to.equal(10);
             expect(calc.add('999,1,0,1')).to.equal(1001);
         });
+
+        it('returns sum of numbers separated by comma or new line', function() {
+            expect(calc.add('1\n2,3')).to.equal(6);
+        });
     });
 
 });

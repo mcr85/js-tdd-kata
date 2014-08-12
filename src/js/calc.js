@@ -18,7 +18,7 @@ Calc.prototype.add = function(numbers) {
         return parseInt(numbers, 10);
     }
 
-    components = numbers.split(',');
+    components = numbers.split('\n').join().split(',');
 
     for (var i = 0; i < components.length; i++) {
         result += parseInt(components[i], 10);
