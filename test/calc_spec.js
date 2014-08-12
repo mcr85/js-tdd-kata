@@ -28,6 +28,12 @@ describe('String Calculator tests', function() {
 
         it('returns sum of numbers separated by comma or new line', function() {
             expect(calc.add('1\n2,3')).to.equal(6);
+            expect(calc.add('1,2\n3,4\n5')).to.equal(15);
+        });
+
+        it('handles default separator (comma) change', function() {
+            expect(calc.add('//;\n1;2')).to.equal(3);
+            expect(calc.add('//|\n1\n2|3')).to.equal(6);
         });
     });
 
