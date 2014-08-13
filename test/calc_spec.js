@@ -35,6 +35,10 @@ describe('String Calculator tests', function() {
             expect(calc.add('//;\n1;2')).to.equal(3);
             expect(calc.add('//|\n1\n2|3')).to.equal(6);
         });
+
+        it('throws exception when negative numbers passed', function() {
+            expect(calc.add.bind(calc, '-1,2,3')).to.throw(Error, /negatives not allowed/);
+        });
     });
 
 });

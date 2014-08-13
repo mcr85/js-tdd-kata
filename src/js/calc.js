@@ -7,7 +7,8 @@ Calc.prototype.constructor = Calc;
 Calc.prototype.add = function(numbers) {
     var components, 
         result = 0,
-        defaultDelimeter;
+        defaultDelimeter,
+        parsedArg;
 
     this.numbers = numbers;
 
@@ -25,7 +26,11 @@ Calc.prototype.add = function(numbers) {
     components = parseArgs.call(this, this.numbers, this.delimeters);
 
     for (var i = 0; i < components.length; i++) {
-        result += parseInt(components[i], 10);
+        parsedArg = parseInt(components[i], 10);
+        if (parsedArg < 0) {
+            throw new Error("negatives not allowed");
+        }
+        result += parsedArg;
     }
 
     // two or more values
