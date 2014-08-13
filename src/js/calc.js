@@ -9,30 +9,45 @@ Calc.prototype.add = function(numbers) {
         result = 0,
         defaultDelimeter;
 
+    this.numbers = numbers;
+
     // no values
-    if (!numbers) {
+    if (!this.numbers) {
         return '';
     }
 
     // one value
-    if (numbers.length === 1) {
-        return parseInt(numbers, 10);
+    if (this.numbers.length === 1) {
+        return parseInt(this.numbers, 10);
     }
 
-    defaultDelimeter = numbers.match(/\/\/(.)\n/);
-    if (!!defaultDelimeter) {
-        this.delimeters[1] = defaultDelimeter[1];
-        numbers = numbers.slice(numbers.indexOf(this.delimeters[0]) + 1);
-    }
-
-    components = numbers.split(this.delimeters[0])
-                        .join(this.delimeters[1])
-                        .split(this.delimeters[1]);
+    handleCustomDelimeter.call(this);
+    components = parseArgs.call(this, this.numbers, this.delimeters);
 
     for (var i = 0; i < components.length; i++) {
         result += parseInt(components[i], 10);
     }
 
-    // two values
+    // two or more values
     return result;
 };
+
+/**
+ * sets custom delimeter and cuts delimeter part from numbers
+ */
+function handleCustomDelimeter() {
+    var defaultDelimeter = this.numbers.match(/\/\/(.)\n/);
+    if (!!defaultDelimeter) {
+        this.delimeters[1] = defaultDelimeter[1];
+        this.numbers = this.numbers.slice(this.numbers.indexOf(this.delimeters[0]) + 1);
+    }
+}
+
+/**
+ * @return {Array}
+ */
+function parseArgs(numbers, delimeters) {
+    return numbers.split(delimeters[0])
+                       .join(delimeters[1])
+                       .split(delimeters[1]);
+}
